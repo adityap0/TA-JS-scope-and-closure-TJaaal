@@ -15,6 +15,8 @@ let hundred = square(10);
 console.log(hundred);
 ```
 
+<!-- Done in register -->
+
 Create the execution context diagram of the following code line by line.
 
 ```js
@@ -26,6 +28,8 @@ var five = addFive(0);
 var ten = addFive(5);
 console.log(five, ten);
 ```
+
+<!-- Done in register -->
 
 Create the execution context diagram of the following code line by line.
 
@@ -42,6 +46,8 @@ function multiplyArrayByN(arr, n) {
 let numbers = multiplyArrayByN(marks);
 ```
 
+<!-- Done in register -->
+
 Create the execution context diagram of the following code line by line.
 
 ```js
@@ -55,6 +61,8 @@ function counter(){
 }
 ```
 
+<!-- Done in register -->
+
 Create the execution context diagram of the following code line by line.
 
 ```js
@@ -67,3 +75,5 @@ let counter = function () {
   return increment();
 };
 ```
+
+<!-- Done in register -->
