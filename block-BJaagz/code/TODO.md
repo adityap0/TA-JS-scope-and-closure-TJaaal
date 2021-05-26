@@ -47,7 +47,10 @@ map(["Sam", "Jon", "Arya"], (name) => name + name); // ['SamSam', 'JonJon', 'Ary
 ```js
 function filter(arr, callback) {
   let final = arr.reduce((acc, cv) => {
-    acc.push(callback(cv));
+    if (callback(cv)) {
+      acc.push(cv);
+    }
+
     return acc;
   }, []);
   return final;
