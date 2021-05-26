@@ -1,6 +1,22 @@
 1. Create a function by your choice that accepts a callback function.
 
+```js
+function acceptCallback(n, cb) {
+  let final = cb(n);
+  return final;
+}
+```
+
 2. Create a function by you choice that returns a function reference.
+
+```js
+function ofChoice(item) {
+  let returnFn = (item) => {
+    return item + 2;
+  };
+  return returnFn;
+}
+```
 
 3. Create a higher order function called `map` that takes two inputs:
    - An array of numbers/string/boolean etc
@@ -9,7 +25,13 @@
 Have `map` return a new array filled with values that are the result of the 'callback' function on each element of the input array.
 
 ```js
-// Your code goes here
+function map(arr, callback) {
+  let final = [];
+  for (let i = 0; i < arr.length; i++) {
+    final.push(callback(arr[i]));
+  }
+  return final;
+}
 
 // Test Your Code
 function multiplyByTwo(n) {
@@ -24,10 +46,14 @@ multiplyByTwo(2); //-> 4
 
 ```js
 // Your code goes here
-
+function forEach(arr, callback) {
+  for (let i = 0; i < arr.length; i++) {
+    callback(arr[i]);
+  }
+}
 // Test Your Code
-let alphabet = '';
-let letters = ['a', 'b', 'c', 'd'];
+let alphabet = "";
+let letters = ["a", "b", "c", "d"];
 forEach(letters, function (char) {
   alphabet += char;
 });
@@ -38,6 +64,13 @@ console.log(alphabet); //prints 'abcd'
 
 ```js
 // Test Your Code
+function filter(arr, callback) {
+  let final = [];
+  for (let i = 0; i < arr.length; i++) {
+    final.push(callback(arr[i]));
+  }
+  return final;
+}
 
 var numbers = [1, 3, 5, 4, 7, 89, 234, 20];
 let even = filter(numbers, function (n) {
