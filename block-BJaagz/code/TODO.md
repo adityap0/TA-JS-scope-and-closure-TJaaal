@@ -50,7 +50,6 @@ function filter(arr, callback) {
     if (callback(cv)) {
       acc.push(cv);
     }
-
     return acc;
   }, []);
   return final;
