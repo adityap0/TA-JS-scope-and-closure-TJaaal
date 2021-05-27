@@ -10,8 +10,14 @@
 **You can use normal for loop for this function**
 
 ```js
-function loop() {
-  // Your code goes here
+function loop(start, testFn, updateFn, bodyFn) {
+  console.log(testFn);
+  console.log(updateFn);
+  // function testFn(i);
+  // function updateFn(i);
+  // for (let n = start; testFn(); updateFn()) {
+  //   bodyFn(n);
+  // }
 }
 
 loop(
@@ -47,22 +53,47 @@ function intersection(arrays) {}
 
 // Test
 console.log(
-  intersection(
-    [5, 10, 15, 20],
-    [15, 88, 1, 5, 7],
-    [1, 10, 15, 5, 20]
-  )
+  intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20])
 ); // should log: [5, 15]
 ```
 
 4. Construct a function `union` that compares input arrays and returns a new array that contains all elements. If there are duplicate elements, only add it once to the new array. Preserve the order of the elements starting from the first element of the first input array.
 
 ```js
-function union(arrays) {}
+function union(arrays) {
+  let final = [];
+  arrays.forEach((innerArr) => {
+    innerArr.forEach((element) => {
+      final.push(element);
+    });
+  });
+  console.log(final);
+  let count = 0;
+  // for (let i = 0; i < final.length; i++) {
+  //   let searchElement = final[i];
+  //   for (let z = i + 1; z < final.length; z++) {
+  //     if (searchElement - final[z] === 0) {
+  //       count += 1;
+  //     }
+  //   }
+  // }
+  console.log(count);
+}
 
+union([
+  [5, 10, 15],
+  [15, 88, 1, 5, 7],
+  [100, 15, 10, 1, 5],
+]);
 // Test
-console.log(
-  union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5])
-);
+console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
 // should log: [5, 10, 15, 88, 1, 7, 100]
+```
+
+```js
+a = [5, 10, 15, 15, 88, 1, 5, 7, 100, 15, 10, 1, 5];
+let final = a.filter((item, i) => {
+  return a.indexOf(item) === i;
+});
+console.log(final);
 ```
