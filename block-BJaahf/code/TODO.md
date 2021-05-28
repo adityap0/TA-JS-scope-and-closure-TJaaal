@@ -11,13 +11,9 @@
 
 ```js
 function loop(start, testFn, updateFn, bodyFn) {
-  console.log(testFn);
-  console.log(updateFn);
-  // function testFn(i);
-  // function updateFn(i);
-  // for (let n = start; testFn(); updateFn()) {
-  //   bodyFn(n);
-  // }
+  for (let i = start; testFn(i); i = updateFn(i)) {
+    bodyFn(i);
+  }
 }
 
 loop(
@@ -36,7 +32,13 @@ loop(
 Here's how it works. The function has an "accumulator value" which starts as the `initialValue` and accumulates the output of each loop. The array is iterated over, passing the accumulator and the next array element as arguments to the `callback`. The callback's return value becomes the new accumulator value. The next loop executes with this new accumulator value. In the example above, the accumulator begins at 0. `add(0,4)` is called. The accumulator's value is now 4. Then `add(4, 1)` to make it 5. Finally `add(5, 3)` brings it to 8, which is returned.
 
 ```js
-function reduce(array, callback, initialValue) {}
+function reduce(array, callback, initialValue) {
+  let final = array.reduce((acc, cv) => {
+    acc = callback(cv, acc);
+    return acc;
+  }, initialValue);
+  return final;
+}
 
 // Test
 var nums = [4, 1, 3];
@@ -49,7 +51,21 @@ reduce(nums, add, 0); //-> 8
 3. Construct a function intersection that compares input arrays and returns a new array with elements found in all of the inputs.
 
 ```js
-function intersection(arrays) {}
+function intersection(...arrays) {
+  let final = arrays[0].reduce((acc, cv) => {
+    let count = 0;
+    for (let i = 1; i < arrays.length; i++) {
+      if (arrays[i].includes(cv)) {
+        count += 1;
+      }
+    }
+    if (count === arrays.length - 1) {
+      acc.push(cv);
+    }
+    return acc;
+  }, []);
+  return final;
+}
 
 // Test
 console.log(
@@ -60,40 +76,21 @@ console.log(
 4. Construct a function `union` that compares input arrays and returns a new array that contains all elements. If there are duplicate elements, only add it once to the new array. Preserve the order of the elements starting from the first element of the first input array.
 
 ```js
-function union(arrays) {
+function union(...arrays) {
   let final = [];
   arrays.forEach((innerArr) => {
     innerArr.forEach((element) => {
       final.push(element);
     });
   });
-  console.log(final);
-  let count = 0;
-  // for (let i = 0; i < final.length; i++) {
-  //   let searchElement = final[i];
-  //   for (let z = i + 1; z < final.length; z++) {
-  //     if (searchElement - final[z] === 0) {
-  //       count += 1;
-  //     }
-  //   }
-  // }
-  console.log(count);
+  final = final.filter((item, i) => {
+    return final.indexOf(item) === i;
+  });
+  return final;
 }
 
-union([
-  [5, 10, 15],
-  [15, 88, 1, 5, 7],
-  [100, 15, 10, 1, 5],
-]);
+union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]);
 // Test
 console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
 // should log: [5, 10, 15, 88, 1, 7, 100]
-```
-
-```js
-a = [5, 10, 15, 15, 88, 1, 5, 7, 100, 15, 10, 1, 5];
-let final = a.filter((item, i) => {
-  return a.indexOf(item) === i;
-});
-console.log(final);
 ```
