@@ -2,12 +2,12 @@
 
 ```js
 function once(cb) {
-  // your code goes here
+  // your code goes her
 }
 
 // TEST
 function sayHello() {
-  alert('Call me once!');
+  alert("Call me once!");
 }
 let log = once(sayHello);
 log(); // alert message "You can only call me once!"
@@ -22,7 +22,7 @@ function once(cb) {
 }
 
 // TEST
-let log = once(console.log, 'Hello Console');
+let log = once(console.log, "Hello Console");
 log(); // log message "Hello Console"
 log(); // return undefinde (can't be called twice)
 ```
@@ -39,7 +39,7 @@ function once(cb) {
 }
 
 // TEST
-let log = once(console.log, 'Message one', 'Message Two');
+let log = once(console.log, "Message one", "Message Two");
 log(); // log message "Message One Message Two"
 log(); // return undefinde (can't be called twice)
 ```
@@ -53,7 +53,7 @@ function nTimes(cb, times, ...rest) {
 
 // TEST
 let log = (msg) => console.log(msg);
-let logThreeTimes = nTimes(log, 3, 'Hello Arya');
+let logThreeTimes = nTimes(log, 3, "Hello Arya");
 logThreeTimes(); // log message "Hello Arya" (1)
 logThreeTimes(); // log message "Hello Arya" (2)
 logThreeTimes(); // log message "Hello Arya" (3)
