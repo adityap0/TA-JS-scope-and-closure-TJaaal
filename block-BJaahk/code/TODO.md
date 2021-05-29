@@ -5,7 +5,15 @@
 The returned function accepts a sentence. If the sentence contains the `fromWord` it should be replaced with `toWord`. Finally when the returned function is called it should return the new sentence.
 
 ```js
-function censor(fromWord, toWord) {} //  Your code goes her
+function censor(fromWord, toWord) {
+  function finalFn(input) {
+    if (input.includes(fromWord)) {
+      input = input.replace(fromWord, toWord);
+      return input;
+    }
+  }
+  return finalFn;
+} //  Your code goes her
 
 let censorSentence = censor("World", "Sam");
 censorSentence("Hello World"); // Hello Sam
@@ -23,9 +31,21 @@ The returned function either accepts two parameter or one parameter.
 
 ```js
 function multipleCensor() {
-  //  Your code goes here
+  let replaceArr = [];
+  function finalFn(str1 = "", str2 = "") {
+    if (str1 !== "" && str2 !== "") {
+      replaceArr.push(str1, str2);
+    } else {
+      replaceArr.forEach((word, i) => {
+        if (i % 2 === 0 && str1.includes(word)) {
+          str1 = str1.replace(word, replaceArr[i + 1]);
+        }
+      });
+      return str1;
+    }
+  }
+  return finalFn;
 }
-
 let censorQuote = multipleCensor();
 censorQuote("forget", "remember"); // two parameter no return
 censorQuote("never", "always"); // two parameter no return
@@ -36,6 +56,7 @@ censorQuote(
 );
 
 // Returns: "Never remember what you are. The rest of the world will not. Wear it like armor, and it can always be used to love you."
+// "Never remember what you are. The rest of the world will not. Wear it like armor, and it can always be used to love you."
 ```
 
 3. Create a function named `createCache` which accepts two parameters - a callback function and a string. The string will act like a password. When the function (`createCache`) is called it should return another function. Take a look at the example to understand it better.
@@ -47,7 +68,19 @@ The returned function accepts one parameter.
 - If the parameter is the same as the password it will return the object in which we stored the values.
 
 ```js
-function createCache() {
+function createCache(callbackFn, password) {
+  let finalObj = {};
+  function finalFn(input) {
+    if (input !== password) {
+      let returnVal = callbackFn(input);
+      finalObj[input] = returnVal;
+      console.log(finalObj);
+      return returnVal;
+    } else {
+      return finalObj;
+    }
+  }
+  return finalFn;
   // Your code goes here
 }
 
@@ -67,7 +100,22 @@ addCache("foo"); // {12: 22, 100: 110, 1: 11}
 4. Change the above function in such a way that when the returned function is called with any other value than password. It should first check the object where we are storing the argument and return value. If the key is present return the value form the object itself. Otherwise call the callback function with the parameter.
 
 ```js
-function createCache() {
+function createCache(callbackFn, password) {
+  let finalObj = {};
+  function finalFn(input) {
+    if (input !== password) {
+      if (Object.keys(finalObj).includes(input)) {
+        return finalObj[input];
+      } else {
+        let returnVal = callbackFn(input);
+        finalObj[input] = returnVal;
+        return returnVal;
+      }
+    } else {
+      return finalObj;
+    }
+  }
+  return finalFn;
   // Your code goes here
 }
 
